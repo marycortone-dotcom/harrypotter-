@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un biglietto per il binario 9¾</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕯️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600;1,700&family=Jost:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#17132f;
+  --dusk:#2c2455;
+  --scarlet:#8f1d2f;
+  --scarlet-d:#6a1322;
+  --brass:#dcb866;
+  --paper:#f7ecd6;
+  --stub:#f1e0bd;
+}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%}
+body{
+  font-family:Jost,system-ui,sans-serif;color:var(--paper);
+  background:radial-gradient(ellipse at 50% 0%,var(--dusk),var(--night) 70%);
+  background-attachment:fixed;overflow-x:hidden;
+  padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);
+}
+#sky{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.star{position:absolute;border-radius:50%;background:#fff;animation:tw 3.5s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.2}50%{opacity:.9}}
+.candle{position:absolute;width:9px;height:34px;border-radius:2px;
+  background:linear-gradient(90deg,#e9dcc0,#fff6df,#e1d2b0);animation:fl 6s ease-in-out infinite}
+.candle::before{content:"";position:absolute;left:50%;top:-17px;width:11px;height:18px;transform:translateX(-50%);
+  border-radius:50% 50% 50% 50%/70% 70% 30% 30%;
+  background:radial-gradient(ellipse at 50% 75%,#fff6c8,#ffc65a 55%,rgba(255,150,40,0) 80%);
+  box-shadow:0 0 28px 12px rgba(255,190,90,.35);animation:fk .4s ease-in-out infinite alternate}
+@keyframes fl{50%{transform:translateY(-14px)}}
+@keyframes fk{to{transform:translateX(-50%) scale(1.08,.94)}}
+
+main{position:relative;z-index:2;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px 18px}
+
+/* lettera sigillata */
+#scene{text-align:center;display:flex;flex-direction:column;align-items:center;gap:26px}
+#scene p{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(1.6rem,5vw,2.4rem);max-width:18ch;line-height:1.15}
+#seal{background:none;border:0;cursor:pointer;width:clamp(120px,26vw,170px);transition:transform .5s,opacity .5s;
+  filter:drop-shadow(0 14px 22px rgba(0,0,0,.5));animation:beat 2.8s ease-in-out infinite}
+#seal:hover{transform:scale(1.06)}
+#seal:focus-visible{outline:3px solid var(--brass);outline-offset:6px;border-radius:50%}
+#seal.open{transform:scale(1.6) rotate(12deg);opacity:0;animation:none}
+@keyframes beat{50%{transform:scale(1.04)}}
+.tap{font-size:.95rem;opacity:.75}
+
+/* biglietto */
+.ticket{display:none;width:min(780px,100%);border-radius:16px;overflow:hidden;
+  box-shadow:0 30px 70px rgba(0,0,0,.55);position:relative;grid-template-columns:1fr 190px}
+.ticket.show{display:grid;animation:unf .9s cubic-bezier(.2,.9,.3,1)}
+@keyframes unf{from{transform:perspective(900px) rotateX(-70deg) scale(.8);opacity:0}}
+.main{background:linear-gradient(160deg,var(--scarlet),var(--scarlet-d));padding:clamp(22px,4vw,40px);
+  border:2px solid var(--brass);border-right:0;border-radius:16px 0 0 16px;position:relative}
+h1{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:700;
+  font-size:clamp(2.1rem,6vw,3.5rem);line-height:1;color:var(--brass);letter-spacing:-.01em}
+.intro{margin-top:12px;max-width:44ch;line-height:1.5;font-size:1.02rem}
+dl{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;margin:22px 0;padding:18px 0;
+  border-top:1px solid rgba(220,184,102,.55);border-bottom:1px solid rgba(220,184,102,.55)}
+dt{font-size:.82rem;color:var(--brass)}
+dd{font-weight:600;font-size:1.08rem}
+.ask{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:700;font-size:clamp(1.5rem,4vw,2rem)}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+button.b{font:600 1rem Jost,sans-serif;cursor:pointer;border-radius:999px;padding:13px 24px;transition:transform .2s}
+button.b:hover{transform:translateY(-2px)}
+button.b:focus-visible{outline:3px solid #fff;outline-offset:3px}
+#yes,#cal{background:var(--brass);color:#2a1408;border:0}
+#hat{background:transparent;color:var(--paper);border:1.5px solid rgba(247,236,214,.6)}
+.stub{background:var(--stub);color:var(--scarlet-d);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:20px;border:2px solid var(--brass);border-left:2px dashed var(--scarlet);border-radius:0 16px 16px 0;gap:4px}
+.stub span{font-size:1rem;font-weight:600}
+.stub b{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:5rem;line-height:1}
+.stub small{font-size:.85rem;max-width:14ch;line-height:1.3}
+#done{display:none}
+.accepted #ask,.accepted .btns.q{display:none}
+.accepted #done{display:block;animation:pop .7s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.9);opacity:0}}
+#done p{margin-top:8px;line-height:1.5;max-width:42ch}
+#done .btns{margin-top:14px}
+.stamp{position:absolute;right:210px;top:34%;transform:rotate(-14deg) scale(2);opacity:0;pointer-events:none;
+  border:3px double var(--brass);color:var(--brass);padding:6px 16px;border-radius:8px;
+  font:600 1.5rem "Cormorant Garamond",serif;font-style:italic;background:rgba(106,19,34,.6)}
+.accepted .stamp{animation:st .5s .15s cubic-bezier(.3,1.6,.5,1) forwards}
+@keyframes st{to{opacity:1;transform:rotate(-14deg) scale(1)}}
+.spark{position:fixed;z-index:5;color:var(--brass);pointer-events:none;animation:sp 2.4s ease-out forwards}
+@keyframes sp{to{transform:translate(var(--x),var(--y)) rotate(200deg);opacity:0}}
+
+@media (max-width:640px){
+  .ticket.show{grid-template-columns:1fr}
+  .main{border-right:2px solid var(--brass);border-bottom:0;border-radius:16px 16px 0 0}
+  .stub{border-left:2px solid var(--brass);border-top:2px dashed var(--scarlet);border-radius:0 0 16px 16px;flex-direction:row;gap:14px;padding:14px}
+  .stub b{font-size:3.2rem}
+  .stamp{right:16px;top:14px}
+  dl{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.accepted .stamp{opacity:1;transform:rotate(-14deg)}}
+</style>
+</head>
+<body>
+<div id="sky" aria-hidden="true"></div>
+
+<main>
+  <section id="scene">
+    <p>Un gufo ha lasciato una lettera per te.</p>
+    <button id="seal" aria-label="Apri la lettera">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <path d="M60 4c9 0 14 8 23 8s16 5 17 14 9 12 9 22-8 13-8 22 2 14-6 21-14 4-22 11-14 14-23 14-14-8-22-14-14-3-22-11-5-12-6-21-8-13-8-22 9-13 9-22 8-14 17-14 14-8 23-8z" fill="#8f1d2f"/>
+        <circle cx="60" cy="60" r="38" fill="none" stroke="#c4506a" stroke-width="3"/>
+        <path d="M60 32l7.5 17.5 19 1.7-14.4 12.4 4.4 18.5L60 72.5 43.5 82.1l4.4-18.5L33.500 51.2l19-1.7z" fill="#c4506a"/>
+      </svg>
+    </button>
+    <span class="tap">Tocca il sigillo per aprirla</span>
+  </section>
+
+  <article class="ticket" id="ticket">
+    <div class="main">
+      <h1>Maratona di Harry Potter</h1>
+      <p class="intro">Il tuo biglietto è pronto. Ti propongo di iniziare insieme la maratona dei film, uno dopo l’altro, finché gli occhi reggono.</p>
+      <dl>
+        <div><dt>Partenza</dt><dd>Venerdì 6 novembre</dd></div>
+        <div><dt>Ora</dt><dd id="f-ora"></dd></div>
+        <div><dt>Da</dt><dd id="f-luogo"></dd></div>
+        <div><dt>Destinazione</dt><dd>Hogwarts</dd></div>
+        <div><dt>Passeggeri</dt><dd id="f-nome"></dd></div>
+        <div><dt>Posto</dt><dd>Divano e coperta</dd></div>
+      </dl>
+      <h2 class="ask" id="ask">Sali a bordo con me?</h2>
+      <div class="btns q">
+        <button class="b" id="yes">Sì, accetto il biglietto</button>
+        <button class="b" id="hat">Chiedo al Cappello Parlante</button>
+      </div>
+      <div id="done" aria-live="polite">
+        <h2 class="ask">Allora è deciso.</h2>
+        <p>Venerdì si parte dal primo film. Pensa tu alla coperta, ai popcorn ci penso io.</p>
+        <div class="btns"><button class="b" id="cal">Salva nel calendario</button></div>
+      </div>
+      <div class="stamp" aria-hidden="true">Approvato</div>
+    </div>
+    <div class="stub">
+      <span>Binario</span><b>9¾</b><small>Valido solo venerdì 6 novembre</small>
+    </div>
+  </article>
+</main>
+
+<script>
+// ✏️ Modifica qui i dettagli
+var ORA   = "20:30";
+var LUOGO = "Casa mia";
+var NOME  = "Io e te";
+
+document.getElementById('f-ora').textContent = ORA;
+document.getElementById('f-luogo').textContent = LUOGO;
+document.getElementById('f-nome').textContent = NOME;
+
+// cielo: stelle e candele
+(function(){
+  var sky=document.getElementById('sky'),h='';
+  for(var i=0;i<80;i++){
+    var z=Math.random()*2.2+.8;
+    h+='<i class="star" style="left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;width:'+z+'px;height:'+z+'px;animation-delay:-'+Math.random()*3+'s"></i>';
+  }
+  var n=innerWidth<600?6:11;
+  for(var j=0;j<n;j++){
+    h+='<i class="candle" style="left:'+(4+Math.random()*92)+'%;top:'+(4+Math.random()*34)+'%;animation-delay:-'+Math.random()*6+'s;animation-duration:'+(5+Math.random()*4)+'s"></i>';
+  }
+  sky.innerHTML=h;
+})();
+
+// apri la lettera
+var seal=document.getElementById('seal'),ticket=document.getElementById('ticket');
+seal.addEventListener('click',function(){
+  seal.classList.add('open');
+  setTimeout(function(){
+    document.getElementById('scene').style.display='none';
+    ticket.classList.add('show');
+  },550);
+});
+
+// accetta
+function accept(){
+  ticket.classList.add('accepted');
+  var r=ticket.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+  for(var i=0;i<46;i++){
+    var s=document.createElement('span');s.className='spark';s.textContent='✦';
+    s.style.left=cx+'px';s.style.top=cy+'px';
+    s.style.fontSize=(10+Math.random()*18)+'px';
+    s.style.setProperty('--x',(Math.random()*700-350)+'px');
+    s.style.setProperty('--y',(Math.random()*500-300)+'px');
+    document.body.appendChild(s);
+    (function(e){setTimeout(function(){e.remove()},2500)})(s);
+  }
+}
+document.getElementById('yes').addEventListener('click',accept);
+document.getElementById('hat').addEventListener('click',function(){
+  var b=this;b.disabled=true;b.textContent='Il Cappello ci sta pensando…';
+  setTimeout(function(){b.textContent='Il Cappello dice: sì';},1100);
+  setTimeout(accept,2300);
+});
+
+// calendario (.ics)
+document.getElementById('cal').addEventListener('click',function(){
+  var p=ORA.split(':'),hh=('0'+p[0]).slice(-2),mm=('0'+(p[1]||'00')).slice(-2);
+  var t=[
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//biglietto//IT','BEGIN:VEVENT',
+    'UID:hp-maratona-20261106@biglietto','DTSTAMP:20261031T000000Z',
+    'DTSTART:20261106T'+hh+mm+'00','DTEND:20261106T235900',
+    'SUMMARY:Maratona di Harry Potter','LOCATION:'+LUOGO,
+    'DESCRIPTION:Binario 9¾. Si parte dal primo film.','END:VEVENT','END:VCALENDAR'
+  ].join('\r\n');
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([t],{type:'text/calendar'}));
+  a.download='maratona-harry-potter.ics';
+  document.body.appendChild(a);a.click();a.remove();
+});
+</script>
+</body>
+</html>
